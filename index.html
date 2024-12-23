@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JNTUH Results</title>
+  <style>
+    /* Same styles as before */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f8f9fa;
+    }
+
+    header img {
+      width: 100%;
+      display: block;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      padding: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      padding: 10px;
+      font-size: 16px;
+      color: white;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-width: 800px;
+      background-color: white;
+      display: none;
+    }
+
+    .result h3 {
+      text-align: center;
+      color: green;
+      margin: 0 0 20px;
+    }
+
+    .result table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .result table th,
+    .result table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .result table th {
+      background-color: #f1f1f1;
+    }
+
+    .result table td {
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        width: 90%;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      input[type="submit"] {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="jntu_oldnow.gif" alt="JNTUH Header Image">
+  </header>
+  <div class="container">
+    <form id="resultForm">
+      <div>
+        <label for="hall-ticket">Enter your HALL TICKET NO.:</label>
+        <input type="text" id="hall-ticket" name="hall-ticket" required>
+      </div>
+      <div>
+        <label for="dob">Enter D.O.B.:</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div>
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+    <div id="resultContainer" class="result"></div>
+  </div>
+
+  <script>
+    async function fetchResults() {
+      try {
+        const response = await fetch('results.json');
+        const data = await response.json();
+        return data.students;
+      } catch (error) {
+        console.error('Error fetching results:', error);
+        return [];
+      }
+    }
+
+    document.getElementById("resultForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const hallTicket = document.getElementById("hall-ticket").value.trim();
+      const dob = document.getElementById("dob").value;
+
+      const students = await fetchResults();
+      const student = students.find(
+        (s) => s.HTNO === hallTicket && s.dob === dob
+      );
+
+      if (student) {
+        document.getElementById("resultForm").style.display = "none";
+        const resultContainer = document.getElementById("resultContainer");
+        resultContainer.style.display = "block";
+
+        let resultHTML = `<h3>Result of III B.Tech. II Semester (R18) Regular 2024 Exams</h3>`;
+        resultHTML += `<p><strong>HTNO:</strong> ${student.HTNO} &nbsp;&nbsp; <strong>Name:</strong> ${student.name}</p>`;
+        resultHTML += `<p><strong>Father Name:</strong> ${student.fatherName} &nbsp;&nbsp; <strong>College Code:</strong> ${student.collegeCode}</p>`;
+        resultHTML += `<table>
+          <thead>
+            <tr>
+              <th>Subject Code</th>
+              <th>Subject Name</th>
+              <th>Internal</th>
+              <th>External</th>
+              <th>Total</th>
+              <th>Grade</th>
+              <th>Credits(C)</th>
+            </tr>
+          </thead>
+          <tbody>`;
+        student.subjects.forEach(subject => {
+          resultHTML += `
+            <tr>
+              <td>${subject.subjectCode}</td>
+              <td>${subject.subjectName}</td>
+              <td>${subject.internal}</td>
+              <td>${subject.external}</td>
+              <td>${subject.total}</td>
+              <td>${subject.grade}</td>
+              <td>${subject.credits}</td>
+            </tr>`;
+        });
+        resultHTML += `</tbody></table>`;
+        resultContainer.innerHTML = resultHTML;
+      } else {
+        alert("Invalid Hall Ticket Number or Date of Birth.");
+      }
+    });
+  </script>
+</body>
+</html>

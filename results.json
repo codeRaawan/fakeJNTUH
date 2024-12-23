@@ -1,0 +1,122 @@
+{
+    "students": [
+      {
+        "HTNO": "21TP1A0553",
+        "name": "RAMAN KRISHNAN",
+        "fatherName": "UDAY SHANKAR GIRI",
+        "collegeCode": "TP",
+        "dob": "2004-12-22",
+        "subjects": [
+            {
+                "subjectCode": "15607",
+                "subjectName": "Compiler Design Lab",
+                "internal": 19,
+                "external": 69,
+                "total": 88,
+                "grade": "A+",
+                "credits": 1.5
+              },
+              {
+                "subjectCode": "15618",
+                "subjectName": "Machine Learning Lab",
+                "internal": 18,
+                "external": 63,
+                "total": 81,
+                "grade": "A+",
+                "credits": 1.5
+              },
+              {
+                "subjectCode": "15629",
+                "subjectName": "Scripting Languages Lab",
+                "internal": 24,
+                "external": 64,
+                "total": 88,
+                "grade": "A+",
+                "credits": 1
+              },
+              {
+                "subjectCode": "15634",
+                "subjectName": "Cyber Security",
+                "internal": 96,
+                "external": 0,
+                "total": 96,
+                "grade": "O",
+                "credits": 3
+              },
+              {
+                "subjectCode": "156AH",
+                "subjectName": "Compiler Design",
+                "internal": 21,
+                "external": 37,
+                "total": 58,
+                "grade": "B",
+                "credits": 4
+              },
+              {
+                "subjectCode": "156AN",
+                "subjectName": "Design and Analysis of Algorithms",
+                "internal": 16,
+                "external": 29,
+                "total": 45,
+                "grade": "C",
+                "credits": 3
+              },
+              {
+                "subjectCode": "156BN",
+                "subjectName": "Machine Learning",
+                "internal": 17,
+                "external": 26,
+                "total": 43,
+                "grade": "C",
+                "credits": 3
+              },
+              {
+                "subjectCode": "156CU",
+                "subjectName": "Scripting Languages",
+                "internal": 21,
+                "external": 26,
+                "total": 47,
+                "grade": "C",
+                "credits": 3
+              },
+              {
+                "subjectCode": "156DR",
+                "subjectName": "Fundamentals of Internet of Things",
+                "internal": 22,
+                "external": 29,
+                "total": 51,
+                "grade": "B",
+                "credits": 3
+              }
+        ]
+      },
+      {
+        "HTNO": "21TP1A0542",
+        "name": "Rahul Singh",
+        "fatherName": "Rajesh Singh",
+        "collegeCode": "TP",
+        "dob": "2003-11-15",
+        "subjects": [
+          {
+            "subjectCode": "15607",
+            "subjectName": "Compiler Design Lab",
+            "internal": 18,
+            "external": 60,
+            "total": 78,
+            "grade": "A",
+            "credits": 1.5
+          },
+          {
+            "subjectCode": "15618",
+            "subjectName": "Machine Learning Lab",
+            "internal": 20,
+            "external": 67,
+            "total": 87,
+            "grade": "A+",
+            "credits": 1.5
+          }
+        ]
+      }
+    ]
+  }
+  
